@@ -3,8 +3,9 @@ import MainLayout from "./../../components/MainLayout";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import { images } from "../../constants";
 import { Link } from "react-router-dom";
-import SuggestedPosts from './container/SuggestedPosts';
+import SuggestedPosts from "./container/SuggestedPosts";
 import CommentContainer from "../../components/comment/CommentContainer";
+import SocialShareButton from "../../components/SocialShareButton";
 
 const breadCrumbData = [
   { name: "Home", link: "/" },
@@ -17,45 +18,45 @@ const postsData = [
     _id: "1",
     image: images.post1,
     title: "Man Workig with Laptop",
-    createdAt: "2020-02-03T07:49:00.894+00:00"
+    createdAt: "2020-02-03T07:49:00.894+00:00",
   },
   {
     _id: "2",
     image: images.post1,
     title: "Post 1",
-    createdAt: "2020-02-03T07:49:00.894+00:00"
+    createdAt: "2020-02-03T07:49:00.894+00:00",
   },
   {
     _id: "3",
     image: images.post1,
     title: "Man Workig with Laptop",
-    createdAt: "2020-02-03T07:49:00.894+00:00"
-  }
-  ,  {
+    createdAt: "2020-02-03T07:49:00.894+00:00",
+  },
+  {
     _id: "4",
     image: images.post1,
     title: "Post 2",
-    createdAt: "2020-02-03T07:49:00.894+00:00"
+    createdAt: "2020-02-03T07:49:00.894+00:00",
   },
   {
     _id: "5",
     image: images.post1,
     title: "Man Workig with Laptop",
-    createdAt: "2020-02-03T07:49:00.894+00:00"
-  }
-]
+    createdAt: "2020-02-03T07:49:00.894+00:00",
+  },
+];
 
 const tagsData = [
-    "Technology",
-    "Science",
-    "Health",
-    "Travel",
-    "Food",
-    "Fashion",
-    "Lifestyle",
-    "Fitness",
-    "Business",
-]
+  "Technology",
+  "Science",
+  "Health",
+  "Travel",
+  "Food",
+  "Fashion",
+  "Lifestyle",
+  "Fitness",
+  "Business",
+];
 const ArticleDetailPage = () => {
   return (
     <MainLayout>
@@ -73,7 +74,9 @@ const ArticleDetailPage = () => {
           >
             EDUCATION
           </Link>
-          <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">Man doing Hard work</h1>
+          <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+            Man doing Hard work
+          </h1>
           <div className="mt-4 text-dark-soft">
             <p className="leading-7">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa quo
@@ -84,9 +87,22 @@ const ArticleDetailPage = () => {
               officiis alias culpa fuga.
             </p>
           </div>
-          <CommentContainer className={'mt-10'} logginedUserId="a" />
+          <CommentContainer className={"mt-10"} logginedUserId="a" />
         </article>
-        <SuggestedPosts header="Latest Articles" className={"mt-8 lg:mt-0 lg:max-w-xs"} posts={postsData} tags={tagsData} />
+        <div>
+          <SuggestedPosts
+            header="Latest Articles"
+            className={"mt-8 lg:mt-0 lg:max-w-xs"}
+            posts={postsData}
+            tags={tagsData}
+          />
+          <div className="mt-7">
+            <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
+              Share on:
+            </h2>
+            <SocialShareButton url={encodeURI("https://advertising.amazon.com/solutions/products/posts")} title={encodeURIComponent("Build engaging content, and expand your reach")} />
+          </div>
+        </div>
       </section>
     </MainLayout>
   );
