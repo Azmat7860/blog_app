@@ -1,7 +1,7 @@
 import React from "react";
-import images from "./../../constants/images";
 import { FiMessageSquare, FiEdit2, FiTrash } from "react-icons/fi";
 import CommentForm from "./CommentForm";
+import { images, stables } from "../../constants";
 
 const Comment = ({
   comment,
@@ -15,7 +15,9 @@ const Comment = ({
   parentId = null,
 }) => {
   const isUserLoggedined = Boolean(logginedUserId);
-  const commentBelongToUser = logginedUserId === comment.user._id;
+  console.log("Check User: ", isUserLoggedined);
+  console.log("Replies: ", replies);
+  const commentBelongsToUser = logginedUserId === comment.user._id;
   const isReplying =
     affectedComment &&
     affectedComment.type === "replying" &&
@@ -29,7 +31,11 @@ const Comment = ({
   return (
     <div className="flex flex-nowrap items-start gap-x-3 bg-[#F2F4F5] p-3 rounded-lg">
       <img
-        src={images.profile1}
+        src={
+          comment?.user?.avatar
+            ? stables.UPLOAD_FOLDER_BASE_URL + comment?.user?.avatar
+            : images.userImage
+        }
         alt="user Profile"
         className="w-9 h-9 object-cover rounded-full"
       />
@@ -70,7 +76,7 @@ const Comment = ({
               <span>Reply</span>
             </button>
           )}
-          {commentBelongToUser && (
+          {commentBelongsToUser && (
             <>
               <button
                 className="flex items-center space-x-2"
@@ -100,7 +106,7 @@ const Comment = ({
             formCancelHandler={() => setAffectedComment(null)}
           />
         )}
-        {replies.lenghth > 0 && (
+        {replies.length > 0 && (
           <div>
             {replies.map((reply) => (
               <Comment

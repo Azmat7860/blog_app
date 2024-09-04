@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import MainLayout from "../../components/MainLayout";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,6 @@ const ProfilePage = () => {
   const {
     data: profileData,
     isLoading: profileIsLoading,
-    error: profileError,
   } = useQuery({
     queryFn: () => {
       return getUserData({ token: userState.userInfo.token });
@@ -26,7 +25,7 @@ const ProfilePage = () => {
     queryKey: ["profile"],
   });
 
-  const { mutate, isLoading, updateProfileIsLoading } = useMutation({
+  const { mutate, updateProfileIsLoading } = useMutation({
     mutationFn: async ({ name, email, password }) => {
       return updateProfile({
         token: userState.userInfo.token,
@@ -62,10 +61,12 @@ const ProfilePage = () => {
       email: "",
       password: "",
     },
-    values: {
-      name: profileIsLoading ? "" : profileData?.name,
-      email: profileIsLoading ? "" : profileData?.email,
-    },
+    values: useMemo(() => {
+      return {
+        name: profileIsLoading ? "" : profileData.name,
+        email: profileIsLoading ? "" : profileData.email,
+      };
+    }, [profileData?.email, profileData?.name, profileIsLoading]),
     mode: "onChange",
   });
 

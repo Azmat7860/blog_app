@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 
-const CommentForm = ({btnLable, formSubmitHandler, formCancelHandler, initialText = ""}) => {
-
-    const [value, setValue] = useState(initialText);
+const CommentForm = ({
+  btnLable,
+  formSubmitHandler,
+  formCancelHandler,
+  initialText = "",
+  loading = false,
+}) => {
+  const [value, setValue] = useState(initialText);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -21,18 +26,24 @@ const CommentForm = ({btnLable, formSubmitHandler, formCancelHandler, initialTex
         ></textarea>
         <div className="flex flex-col-reverse gap-y-2 items-center gap-x-2 pt-2 min-[420px]:flex-row">
           {formCancelHandler && (
-            <button onClick={formCancelHandler} className="px-6 py-2 rounded-lg border border-red-500 text-red-500">
+            <button
+              onClick={formCancelHandler}
+              className="px-6 py-2 rounded-lg border border-red-500 text-red-500"
+            >
               Cancel
             </button>
           )}
-        <button type="submit" className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold">
+          <button
+            disabled={loading}
+            type="submit"
+            className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+          >
             {btnLable}
-        </button>
+          </button>
         </div>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default CommentForm
-
+export default CommentForm;
