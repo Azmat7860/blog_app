@@ -9,7 +9,7 @@ import ErrorMessage from "../../../components/ErrorMessage";
 
 const Article = () => {
   const { data, isLoading, isError } = useQuery({
-    queryFn: () => getAllPosts(),
+    queryFn: () => getAllPosts("", 1, 6),
     queryKey: ["posts"],
     onError: (error) => {
       toast.error(error.message);
@@ -29,7 +29,7 @@ const Article = () => {
         ) : isError ? (
           <ErrorMessage message="Couldn't fetch the posts data" />
         ) : (
-          data?.map((post) => (
+          data?.data?.map((post) => (
             <ArticleCard
               key={post._id}
               post={post}

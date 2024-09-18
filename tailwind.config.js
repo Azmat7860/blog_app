@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -19,7 +17,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require('daisyui')],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
 
   daisyui: {
     themes: [], // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
@@ -28,5 +26,4 @@ module.exports = {
     utils: true, // adds responsive and modifier utility classes
     prefix: "d-",
   },
-}
-
+};

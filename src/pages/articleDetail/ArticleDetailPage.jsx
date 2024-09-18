@@ -17,7 +17,7 @@ const ArticleDetailPage = () => {
   const userState = useSelector((state) => state.user);
   console.log("USERID: ", userState.userInfo.id);
   const [breadCrumbsData, setbreadCrumbsData] = useState([]);
-  const [body, setBody] = useState(null);
+  // const [body, setBody] = useState(null);
   console.log(slug);
 
   const { data, isLoading, isError } = useQuery({
@@ -42,71 +42,68 @@ const ArticleDetailPage = () => {
 
   return (
     <MainLayout>
-      {isLoading ? (
-        <ArticleDetailSkeleton />
-      ) : isError ? (
-        <ErrorMessage message={"Couldn't fetch the posts data"} />
-      ) : (
-        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
-          <article className="flex-1">
-            <BreadCrumbs data={breadCrumbsData} />
-            <img
-              className="rounded-xl w-full h-[400px] object-cover"
-              src={
-                data?.photo
-                  ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
-                  : images.samplePostImage
-              }
-              alt={data?.title}
-            />
-            <div className="mt-4 flex gap-2">
-              {data?.categories.map((category) => (
-                <Link
-                  to={`/blog?category=${category.name}`}
-                  className="text-primary text-sm font-roboto inline-block md:text-base"
-                >
-                  {category.name}
-                </Link>
-              ))}
-            </div>
-            <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
-              {data?.title}
-            </h1>
-            <div className="mt-4 text-dark-soft">
-              <p className="leading-7">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-                quo delectus aut et illo a commodi! Odio odit tenetur
-                recusandae? Fugiat enim quidem minus, quis molestiae sequi
-                pariatur nulla.
-              </p>
-            </div>
-            <CommentContainer
-              comments={data?.comments}
-              className={"mt-10"}
-              logginedUserId={userState?.userInfo?.id}
-              postSlug={slug}
-            />
-          </article>
-          <div>
-            <SuggestedPosts
-              header="Latest Articles"
-              className={"mt-8 lg:mt-0 lg:max-w-xs"}
-              posts={postsData}
-              tags={data?.tags}
-            />
-            <div className="mt-7">
-              <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
-                Share on:
-              </h2>
-              <SocialShareButton
-                url={encodeURI(window.location.href)}
-                title={encodeURIComponent(data?.title)}
-              />
-            </div>
+    {isLoading ? (
+      <ArticleDetailSkeleton />
+    ) : isError ? (
+      <ErrorMessage message="Couldn't fetch the post detail" />
+    ) : (
+      <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
+        <article className="flex-1">
+          <BreadCrumbs data={breadCrumbsData} />
+          <img
+            className="rounded-xl w-full"
+            src={
+              data?.photo
+                ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+                : images.samplePostImage
+            }
+            alt={data?.title}
+          />
+          <div className="mt-4 flex gap-2">
+            {data?.categories.map((category) => (
+              <Link
+                to={`/blog?category=${category.name}`}
+                className="text-primary text-sm font-roboto inline-block md:text-base"
+              >
+                {category.name}
+              </Link>
+            ))}
           </div>
-        </section>
-      )}
-    </MainLayout>
+          <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+            {data?.title}
+          </h1>
+          <div className="w-full">
+            {!isLoading && !isError && (
+              <Editor content={data?.body} editable={false} />
+            )}
+          </div>
+          <CommentsContainer
+            comments={data?.comments}
+            className="mt-10"
+            logginedUserId={userState?.userInfo?._id}
+            postSlug={slug}
+          />
+        </article>
+        <div>
+          <SuggestedPosts
+            header="Latest Article"
+            posts={postsData?.data}
+            tags={data?.tags}
+            className="mt-8 lg:mt-0 lg:max-w-xs"
+          />
+          <div className="mt-7">
+            <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
+              Share on:
+            </h2>
+            <SocialShareButtons
+              url={encodeURI(window.location.href)}
+              title={encodeURIComponent(data?.title)}
+            />
+          </div>
+        </div>
+      </section>
+    )}
+  </MainLayout>
   );
 };
 
