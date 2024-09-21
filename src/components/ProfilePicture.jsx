@@ -7,7 +7,7 @@ import { updateProfilePicture } from "../service/index/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { userActions } from "../store/reducers/userReducer";
+import { userActions } from "../store/reducers/userReducers";
 
 const ProfilePicture = ({ avatar }) => {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ const ProfilePicture = ({ avatar }) => {
       return updateProfilePicture({
         token: token,
         formData: formData,
+        userId: userState.userInfo._id,
       });
     },
     onSuccess: (data) => {

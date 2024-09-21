@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signup } from "../../service/index/user";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../../store/reducers/userReducer";
+import { userActions } from "../../store/reducers/userReducers";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {

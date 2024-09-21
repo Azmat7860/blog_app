@@ -1,10 +1,6 @@
 import axios from "axios";
 
-export const getAllPosts = async ({
-  searchKeyword = "",
-  page = 1,
-  limit = 10,
-}) => {
+export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
     const { data, headers } = await axios.get(
       `/api/post?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
@@ -20,7 +16,6 @@ export const getAllPosts = async ({
 export const getPost = async ({ slug }) => {
   try {
     const { data } = await axios.get(`/api/post/${slug}`);
-    console.log(data);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -38,7 +33,6 @@ export const deletePost = async ({ slug, token }) => {
     };
 
     const { data } = await axios.get(`/api/post/${slug}`, config);
-    console.log(data);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

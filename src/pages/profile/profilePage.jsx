@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getUserData, updateProfile } from "../../service/index/user";
 import ProfilePicture from "../../components/ProfilePicture";
 import toast from "react-hot-toast";
-import { userActions } from "../../store/reducers/userReducer";
+import { userActions } from "../../store/reducers/userReducers";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();

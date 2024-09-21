@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfilePicture } from "../../service/index/user";
-import { userActions } from "../../store/reducers/userReducer";
+import { userActions } from "../../store/reducers/userReducers";
 
 const EasyCrop = ({ photo, setOpenCrop }) => {
   const dispatch = useDispatch();

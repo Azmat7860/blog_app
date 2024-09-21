@@ -3,7 +3,7 @@ import heroImage from '../assets/HeroImage.svg'
 import post1 from '../assets/pexels-andrea-piacquadio-842548.jpg'
 import profile1 from '../assets/pexels-jerald-rubio-4776214.jpg'
 import CTAImage from '../assets/CtaImage.jpg'
-const userImage = "images/user.png"
+const userImage = "/images/user.png"
 const samplePostImage = "/images/sample.jpg"
 
 const images = {

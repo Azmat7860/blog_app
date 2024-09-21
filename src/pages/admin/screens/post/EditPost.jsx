@@ -1,16 +1,21 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { getPost, updatePost } from "../../../../service/index/post";
+import CreatableSelect from "react-select/creatable";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ArticleDetailSkeleton from "../../../articleDetail/components/ArticleDetailSkeleton";
 import ErrorMessage from "../../../../components/ErrorMessage";
 import { stables } from "../../../../constants";
 import { HiOutlineCamera } from "react-icons/hi";
 import { toast } from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import Editor from "../../../../components/editor/Editor";
+import MultiSelectTagDropdown from "../../components/select-dropdown/MultiSelectTagDropdown";
+import {
+  categoryToOption,
+  filterCategories,
+} from "../../../../utils/multiSelectTagUtils";
+import { getPost, updatePost } from "../../../../service/index/post";
 import { getAllCategories } from "../../../../service/index/postCategories";
-import { filterCategories } from "../../../../utils/multiSelectTagUtils";
 
 const promiseOptions = async (inputValue) => {
   const { data: categoriesData } = await getAllCategories();
@@ -55,6 +60,7 @@ const EditPost = () => {
       });
     },
     onSuccess: (data) => {
+      console.log("MyData: ", data);
       queryClient.invalidateQueries(["blog", slug]);
       toast.success("Post is updated");
       navigate(`/admin/posts/manage/edit/${data.slug}`, { replace: true });
@@ -152,7 +158,7 @@ const EditPost = () => {
               Delete Image
             </button>
             <div className="mt-4 flex gap-2">
-              {data?.categories.map((category) => (
+              {data?.categories?.map((category) => (
                 <Link
                   to={`/blog?category=${category.name}`}
                   className="text-primary text-sm font-roboto inline-block md:text-base"
