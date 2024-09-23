@@ -16,6 +16,10 @@ import LoginPage from './pages/login/loginPage';
 import ProfilePage from './pages/profile/profilePage';
 import RegisterPage from './pages/register/RegisterPage';
 import Home from './pages/home/Home';
+import About from "./pages/home/About";
+import Contact from "./pages/home/Contact";
+import Pricing from "./pages/home/Pricing";
+import FAQs from "./pages/home/FAQs";
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/faq" element={<FAQs />} />
         <Route path="/blog/:slug" element={<ArticleDetailPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
