@@ -9,7 +9,7 @@ const ArticleCard = ({ post, className }) => {
     <div
       className={`rounded-xl overflow-hidden shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] ${className}`}
     >
-      <Link to={`blog/${post.slug}`}>
+      <Link to={`/blog/${post.slug}`}>
         <img
           src={
             post.photo
@@ -21,7 +21,7 @@ const ArticleCard = ({ post, className }) => {
         />
       </Link>
       <div className="p-5">
-        <Link to={`blog/${post.slug}`}>
+        <Link to={`/blog/${post.slug}`}>
           <h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[28px]">
             {post.title}
           </h2>

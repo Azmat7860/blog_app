@@ -18,7 +18,7 @@ const Contact = () => {
             {/* Contact Form Section */}
             <div className="md:w-1/2 p-6">
               <h2 className="text-3xl font-semibold mb-6">Contact Us</h2>
-              <form action="#" method="POST" className="space-y-6">
+              <form method="POST" className="space-y-6">
                 <div>
                   <label
                     htmlFor="name"
